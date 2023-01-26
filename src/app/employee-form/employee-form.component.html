@@ -1,0 +1,36 @@
+<div class="container">
+    <h1>Employee information</h1>
+    <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+        <div class="from-group">
+            <label for="name">Name</label>
+            <input name="name" id="name" class="form-control" type="text" required
+            [(ngModel)]="newEmployee.name" #employeerName="ngModel" #watchState>
+            <br> Current statate {{watchState.className}}
+            <div [hidden]="employeerName.valid || employeerName.pristine" class="alert alert-danger">
+                Name is required (must not blank)
+            </div>
+        </div>
+        <div class="from-group">
+            <label for="dateOfBirth">Date Of Birth</label>
+            <input name="dateOfBirth" id="dateOfBirth" class="form-control" type="text" required
+            [(ngModel)]="newEmployee.dateOfBirth" #dob="ngModel" #watchState>
+            <div [hidden]="dob.valid || dob.pristine" class="alert alert-danger">
+                Date of Birth is required (must not blank)
+            </div>
+        </div>
+        <div class="from-group">
+            <label for="alias">Alias</label>
+            <input name="alias" id="alias" class="form-control" type="text">
+        </div>
+        <div class="from-group">
+            <label for="jobCategory">Job Category</label>
+            <select name="jobCategory" id="jobCategory" class="form-control">
+                <option *ngFor="let eachJobCategory of jobCategories">
+                    {{eachJobCategory}}
+                </option>
+            </select>
+        </div>
+        <button (click)="addNewEmplyee(); employeeForm.reset" type="button" class="btn btn-default">New Employee</button>
+        <button type="submit" class="btn btn-success" [disabled]="!employeeForm.valid">Submit</button>
+    </form>
+</div>
